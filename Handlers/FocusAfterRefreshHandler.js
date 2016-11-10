@@ -9,83 +9,86 @@
 	
 	ns.Extesion.Handlers.FocusAfterRefreshHandler = function()
 	{
-			var _checkFocusStorage = function (storage, options)
+		var _checkFocusStorage = function (storage, options)
+		{
+			var itemJson = ns.Viewstate.get(storage);
+
+			if (itemJson)
 			{
-				var itemJson = ns.Viewstate.get(storage);
-
-				if (itemJson)
+				itemJson = ns.parseEscapedJSON(itemJson)
+				var selectors = [];
+				for (var j = 0; j < itemJson.length; j++)
 				{
-					itemJson = ns.parseEscapedJSON(itemJson)
-					var selectors = [];
-					for (var j = 0; j < itemJson.length; j++)
+					if ((!itemJson[j].condition || eval(unescape(itemJson[j].condition))) &&
+						(!options || _checkForParent(itemJson[j].selectors, options.items)))
 					{
-						if ((!itemJson[j].condition || eval(unescape(itemJson[j].condition))) &&
-							(!options || _checkForParent(itemJson[j].selectors, options.items)))
-						{
-							selectors.push.apply(selectors, itemJson[j].selectors);
-						}
+						selectors.push.apply(selectors, itemJson[j].selectors);
 					}
+				}
 
-					if (selectors.length > 0)
+				if (selectors.length > 0)
+				{
+					var recursion = function (value)
 					{
-						var recursion = function (value)
+						var isFound = false;
+						for (var i = 0; i < selectors.length; i++)
 						{
-							var isFound = false;
-							for (var i = 0; i < selectors.length; i++)
+							var $el = $(unescape(selectors[i]));
+
+							if ($el != undefined && $el != null && $el.length > 0)
 							{
-								var $el = $(unescape(selectors[i]));
+								User1st.Web.Handlers.tabIndexerKeyboard.focusOnAbsoluteElement($el);
 
-								if ($el != undefined && $el != null && $el.length > 0)
+								if (options.isKeyboardNav)
 								{
-									User1st.Web.Handlers.tabIndexerKeyboard.focusOnAbsoluteElement($el);
-
-									if (options.isKeyboardNav)
-									{
-										ns.serviceLocator.consumeService(ns.Consts.serviceLocator.topics.applyHighlighter, null, { element: $el });
-									}
-
-									isFound = true;
-									break;
+									ns.serviceLocator.consumeService(ns.Consts.serviceLocator.topics.applyHighlighter, null, { element: $el });
 								}
+
+								isFound = true;
+								break;
 							}
-							if (!isFound && value > 0)
-								window.setTimeout(function () { recursion(value - 1); }, 50);
-						};
-
-						recursion(60);
-					}
-
-				}
-			},
-			_checkForParent = function (selectors, parentselectors)
-			{
-				var isIn = false;
-				for (var j = 0; j < parentselectors.length; j++)
-				{
-					var parent = ns.parseEscapedJSON(parentselectors[j].selector).selector;
-					for (var i = 0; i < selectors.length; i++)
-						if ($(selectors[i]).parents().find(parent).length > 0)
-						{
-							isIn = true; break;
 						}
-					if (isIn) break;
+						if (!isFound && value > 0)
+							window.setTimeout(function () { recursion(value - 1); }, 50);
+					};
+
+					recursion(60);
 				}
-				return isIn;
+
 			}
-			_init(scope, options){
-					if(scope == ns.handlerTarget.page)	
-						_checkFocusStorage("u1st-focusAfterRefresh");
-					else	
-						_checkFocusStorage("u1st-focusAfterDynamicRefresh", options);
-				},
-			
-			handler = {
-			handle: function(scope, options){
-				_init(scope, options);
-			},
-			dispose: function(){
+		},
+		_checkForParent = function (selectors, parentselectors)
+		{
+			var isIn = false;
+			for (var j = 0; j < parentselectors.length; j++)
+			{
+				var parent = ns.parseEscapedJSON(parentselectors[j].selector).selector;
+				for (var i = 0; i < selectors.length; i++)
+					if ($(selectors[i]).parents().find(parent).length > 0)
+					{
+						isIn = true; break;
+					}
+				if (isIn) break;
 			}
-		}
+			return isIn;
+		},
+		
+		_init = function(scope, options)
+		{
+				if(scope == ns.handlerTarget.page)	
+					_checkFocusStorage("u1st-focusAfterRefresh");
+				else	
+					_checkFocusStorage("u1st-focusAfterDynamicRefresh", options);
+		
+		},
+		
+		handler = {
+    		handle: function(scope, options){
+    			_init(scope, options);
+    		},
+    		dispose: function(){
+			}
+		};
 		
 		return handler;
 	};
