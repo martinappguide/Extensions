@@ -60,4 +60,5 @@ User1st is the most robust & effective product for digital accessibility. User1s
     <li>MediaQuery – CSS media queries</li>
     </ul>
   </li>
+  <li>All extensions aren't applied automatically and should be approved by website administrators</li>
 </ul>
