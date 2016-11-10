@@ -44,5 +44,11 @@ User1st is the most robust & effective product for digital accessibility. User1s
     <li>Device – target device of the handler. The value could be all, desktop, tablet, mobile; the values are located User1st.Web. Extensions.handlerDevice enumeration</li>
   </ul>
   </li>
-
+ <li>
+  Use <code class="language-javascript">User1st.Web.Extesion.addAPIFunction (name, func)</code> to apply an API function to Extensions: 
+  <ul>
+    <li>Name – unique name of the function</li>
+    <li>Func – inline function. The function will be called using the following syntax inside the mapping scripts: <code class="language-javascript">api.utilities.name(…)</code></li>
+    </ul>
+  </li>
 </ul>
