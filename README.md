@@ -62,3 +62,12 @@ User1st is the most robust & effective product for digital accessibility. User1s
   </li>
   <li>All extensions aren't applied automatically and should be approved by website administrators</li>
 </ul>
+<h3>Browsers & Devices support</h3>
+<ul>
+    <li>Handlers should support 3 last version of the most popular browsers on specific device(s)</li>
+    <li>API functions and CSS rules should support 3 last version of the most popular browsers on all popular devices</li>
+    <li>All extensions should be tested with the modern Screen readers such as Jaws, NVDA, Voice over</li>
+</ul>
+
+	
+
