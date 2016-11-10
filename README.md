@@ -45,10 +45,19 @@ User1st is the most robust & effective product for digital accessibility. User1s
   </ul>
   </li>
  <li>
-  Use <code class="language-javascript">User1st.Web.Extesion.addAPIFunction (name, func)</code> to apply an API function to Extensions: 
+  Use <code class="language-javascript">User1st.Web.Extesion.addAPIFunction(name, func)</code> to apply an API function to Extensions: 
   <ul>
     <li>Name – unique name of the function</li>
     <li>Func – inline function. The function will be called using the following syntax inside the mapping scripts: <code class="language-javascript">api.utilities.name(…)</code></li>
+    </ul>
+  </li>
+  <li>
+  Use <code class="language-javascript">User1st.Web.Extesion.addCSSRule(name, selector, rules, mediaQuery) </code> to apply a custom CSS rule to Extensions: 
+  <ul>
+    <li>Name – unique name of the CSS rule</li>
+    <li>Selector – CSS selector or selectors to define the targets of the rules</li>
+    <li>Rules – CSS rules body</li>
+    <li>MediaQuery – CSS media queries</li>
     </ul>
   </li>
 </ul>
