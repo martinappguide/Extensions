@@ -2,7 +2,7 @@
 {
     "use strict";
 
-    //ns.Extesion.Handlers namespace hast be used111
+    //ns.Extesion.Handlers namespace hast be used
 
 
 
