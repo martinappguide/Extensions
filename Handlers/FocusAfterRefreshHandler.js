@@ -80,13 +80,32 @@
 				},
 			
 			handler = {
-			handle: function(){
-				_init();
+			handle: function(scope, options){
+				_init(scope, options);
 			},
 			dispose: function(){
 			}
 		}
-	}
-
+		
+		return handler;
+	};
+	
+	ns.Extensions.Extesion.FocusAfterRefreshHandler("FocusAfterRefreshHandler_Page",
+                    ns.handlerTarget.page,
+                    20000,
+                    null,
+                    null,
+                    ns.Extensions.Handlers.CloseDialogHandler.handle(ns.handlerTarget.page),
+                    ns.Extensions.Handlers.CloseDialogHandler.dispose(),
+                    null);
+					
+	ns.Extensions.Extesion.FocusAfterRefreshHandler("FocusAfterRefreshHandler_Dynamic",
+                    ns.handlerTarget.item | ns.handlerTarget.dynamicElement | ns.handlerTarget.popUp,
+                    20000,
+                    null,
+                    null,
+                    ns.Extensions.Handlers.CloseDialogHandler.handle(ns.handlerTarget.item | ns.handlerTarget.dynamicElement | ns.handlerTarget.popUp),
+                    ns.Extensions.Handlers.CloseDialogHandler.dispose(),
+                    null);
 
 })(User1st.Web, uf$);
