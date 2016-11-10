@@ -115,8 +115,8 @@
                     20000,
                     null,
                     null,
-                    ns.Extensions.Handlers.CloseDialogHandler.handle(),
-                    ns.Extensions.Handlers.CloseDialogHandler.dispose(),
+                    ns.Extensions.Handlers.CloseDialogHandler.handle,
+                    ns.Extensions.Handlers.CloseDialogHandler.dispose,
                     null);
 
 })(User1st.Web, uf$);
