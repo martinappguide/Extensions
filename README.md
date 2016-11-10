@@ -6,3 +6,6 @@ User1st is the most robust & effective product for digital accessibility. User1s
 The project “Extensions” allows extending of User1st accessibility suite. 
 
 </p>
+
+<h3>What inside</h3>
+User1st gives possibility to extend the Accessibility Suite by three options: creation of new handlers, registration of new Suite's functions and setting custom CSS rules.
