@@ -2,7 +2,7 @@
 {
     "use strict";
 
-    //ns.Extesion.CSS namespace has be used
+    //ns.Extesion.CSS namespace has be used 
 
 
 
